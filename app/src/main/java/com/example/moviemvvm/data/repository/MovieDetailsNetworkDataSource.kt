@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.moviemvvm.data.api.TheMovieDBInterface
 import com.example.moviemvvm.data.value_object.MovieDetails
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 
 //API를 rxJava를 통해서 불러옴
 //가져온 데이터를 라이브 데이터로 저장
@@ -28,6 +29,7 @@ class MovieDetailsNetworkDataSource(
         try {
             compositeDisposable.add(
                 apiService.getMovieDetails(movieId)
+                    .subscribeOn(Schedulers.io())
                     .subscribe(
                         {
                             _downloadedMovieDetailsResponse.postValue(it)
