@@ -1,10 +1,10 @@
-package com.example.moviemvvm
+package com.example.moviemvvm.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.moviemvvm.databinding.ActivityMainBinding
-import com.example.moviemvvm.single_movie_details.SingleMovieActivity
+import com.example.moviemvvm.ui.single_movie_details.SingleMovieActivity
 
 class MainActivity : AppCompatActivity() {
 
