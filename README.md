@@ -9,11 +9,12 @@
 * MVVM
 * retrofit
 * rxJava
-* pagination
+* Paging2
 
 ## 완료 후 할 일
 * 코드 리팩토링
-  1. retrofit2 적용 
-  2. coroutine 적용 
-  3. xml 간단한 구조로 수정
+  1. ~~view binding 적용~~
+  2. Paging3 적용 
+  3. coroutine 적용 
+  4. xml 간단한 구조로 수정
 * 각 기술 리뷰
