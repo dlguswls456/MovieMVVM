@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:text="Connection Problem!!"
+            android:text="@string/connection_problem"
             android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView

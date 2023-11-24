@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">MovieMVVM</string>
+
+    <string name="connection_problem">Connection Problem!!</string>
+    <string name="movie">movie</string>
+    <string name="sub_title">sub title</string>
+    <string name="movie_info">Movie Info</string>
+    <string name="release_date">ReleaseDate: </string>
+    <string name="rating">Rating: </string>
+    <string name="runtime">Runtime: </string>
+    <string name="budget">Budget: </string>
+    <string name="revenue">Revenue: </string>
+    <string name="overview">Overview</string>
+    <string name="error_message">Error Message</string>
+    <string name="success">Success</string>
+    <string name="running">Running</string>
+    <string name="error">Something went wrong</string>
+    <string name="end_of_list">You have reached the end</string>
+    <string name="minutes">%sminutes</string>
 </resources>

@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.example.moviemvvm.R
 import com.example.moviemvvm.data.api.POSTER_BASE_URL
 import com.example.moviemvvm.data.api.TheMovieDBClient
 import com.example.moviemvvm.data.api.TheMovieDBInterface
@@ -50,7 +51,7 @@ class SingleMovieActivity : AppCompatActivity() {
         binding.movieTagline.text = it.tagline
         binding.movieReleaseDate.text = it.releaseDate
         binding.movieRating.text = it.rating.toString()
-        binding.movieRuntime.text = it.runtime.toString() + "minutes"
+        binding.movieRuntime.text = getString(R.string.minutes, it.runtime.toString())
         binding.movieOverview.text = it.overview
 
         val formatCurrency = NumberFormat.getCurrencyInstance(Locale.US)

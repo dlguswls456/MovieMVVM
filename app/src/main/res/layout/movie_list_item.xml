@@ -32,7 +32,6 @@
             android:layout_marginTop="2dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="movie"
             android:textSize="12sp" />
 
         <TextView
@@ -42,7 +41,6 @@
             android:layout_marginStart="4dp"
             android:layout_marginBottom="4dp"
             android:maxLength="4"
-            android:text="2019"
             android:textSize="12sp" />
 
     </LinearLayout>
