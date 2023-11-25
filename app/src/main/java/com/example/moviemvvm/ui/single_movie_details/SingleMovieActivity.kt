@@ -28,17 +28,21 @@ class SingleMovieActivity : AppCompatActivity() {
         binding = ActivitySingleMovieBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val movieId: Int = intent.getIntExtra("id", 1)
+        initRepository()
 
+        val movieId: Int = intent.getIntExtra("id", 1)
+        initViewModel(movieId)
+        initUI()
+        initNetworkUI()
+
+    }
+
+    private fun initRepository() {
         val apiService: TheMovieDBInterface = TheMovieDBClient.getClient()
         movieRepository = MovieDetailsRepository(apiService)
+    }
 
-        viewModel = getViewModel(movieId)
-
-        viewModel.movieDetails.observe(this, Observer {
-            bindUI(it)
-        })
-
+    private fun initNetworkUI() {
         viewModel.networkState.observe(this, Observer {
             binding.progressBar.visibility =
                 if (it == NetworkState.LOADING) View.VISIBLE else View.GONE
@@ -46,27 +50,28 @@ class SingleMovieActivity : AppCompatActivity() {
         })
     }
 
-    private fun bindUI(it: MovieDetails) {
-        binding.movieTitle.text = it.title
-        binding.movieTagline.text = it.tagline
-        binding.movieReleaseDate.text = it.releaseDate
-        binding.movieRating.text = it.rating.toString()
-        binding.movieRuntime.text = getString(R.string.minutes, it.runtime.toString())
-        binding.movieOverview.text = it.overview
+    private fun initUI() {
+        viewModel.movieDetails.observe(this) { movieDetails ->
+            binding.movieTitle.text = movieDetails.title
+            binding.movieTagline.text = movieDetails.tagline
+            binding.movieReleaseDate.text = movieDetails.releaseDate
+            binding.movieRating.text = movieDetails.rating.toString()
+            binding.movieRuntime.text = getString(R.string.minutes, movieDetails.runtime.toString())
+            binding.movieOverview.text = movieDetails.overview
 
-        val formatCurrency = NumberFormat.getCurrencyInstance(Locale.US)
-        binding.movieBudget.text = formatCurrency.format(it.budget)
-        binding.movieRevenue.text = formatCurrency.format(it.revenue)
+            val formatCurrency = NumberFormat.getCurrencyInstance(Locale.US)
+            binding.movieBudget.text = formatCurrency.format(movieDetails.budget)
+            binding.movieRevenue.text = formatCurrency.format(movieDetails.revenue)
 
-        val moviePosterURL: String = POSTER_BASE_URL + it.posterPath
-        Glide.with(this)
-            .load(moviePosterURL)
-            .into(binding.ivMoviePoster)
-
+            val moviePosterURL: String = POSTER_BASE_URL + movieDetails.posterPath
+            Glide.with(this)
+                .load(moviePosterURL)
+                .into(binding.ivMoviePoster)
+        }
     }
 
-    private fun getViewModel(movieId: Int): SingleMovieViewModel {
-        return ViewModelProvider(this, object : ViewModelProvider.Factory {
+    private fun initViewModel(movieId: Int) {
+        viewModel = ViewModelProvider(this, object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
                 return SingleMovieViewModel(movieRepository, movieId) as T
             }
