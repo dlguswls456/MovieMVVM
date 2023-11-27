@@ -21,25 +21,17 @@ class SingleMovieActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySingleMovieBinding
     private lateinit var viewModel: SingleMovieViewModel
-    private lateinit var movieRepository: MovieDetailsRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySingleMovieBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        initRepository()
-
         val movieId: Int = intent.getIntExtra("id", 1)
         initViewModel(movieId)
         initUI()
         initNetworkUI()
 
-    }
-
-    private fun initRepository() {
-        val apiService: TheMovieDBInterface = TheMovieDBClient.getClient()
-        movieRepository = MovieDetailsRepository(apiService)
     }
 
     private fun initNetworkUI() {
@@ -73,7 +65,7 @@ class SingleMovieActivity : AppCompatActivity() {
     private fun initViewModel(movieId: Int) {
         viewModel = ViewModelProvider(this, object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return SingleMovieViewModel(movieRepository, movieId) as T
+                return SingleMovieViewModel(movieId) as T
             }
         })[SingleMovieViewModel::class.java]
     }

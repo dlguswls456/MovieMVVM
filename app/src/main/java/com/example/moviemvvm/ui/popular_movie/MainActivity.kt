@@ -18,16 +18,11 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainActivityViewModel
-    lateinit var moviePagedListRepository: MoviePagedListRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        val apiService: TheMovieDBInterface = TheMovieDBClient.getClient()
-
-        moviePagedListRepository = MoviePagedListRepository(apiService)
 
         viewModel = getViewModel()
 
@@ -68,7 +63,7 @@ class MainActivity : AppCompatActivity() {
     private fun getViewModel(): MainActivityViewModel {
         return ViewModelProvider(this, object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return MainActivityViewModel(moviePagedListRepository) as T
+                return MainActivityViewModel() as T
             }
         })[MainActivityViewModel::class.java]
 
